@@ -1,5 +1,4 @@
 
-
 const aside = document.querySelector('.aside');
 const ordercall = document.querySelector('.ordercall');
 const feedback = document.querySelector('.feedback');
@@ -88,7 +87,7 @@ feedbackDisn.addEventListener('click', function () {
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    const resizableSwiper = (breakpoint, swiperClass, swiperSettings, callback) => {
+    const resizableSwiper1 = (breakpoint, swiperClass, swiperSettings, callback) => {
         let swiper;
 
         breakpoint = window.matchMedia(breakpoint);
@@ -122,9 +121,112 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    resizableSwiper(
+    resizableSwiper1(
         '(max-width: 767px)',
         '.swiper__brend',
+        {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1.2,
+                },
+                350: {
+                    slidesPerView: 1.3,
+                },
+                380: {
+                    slidesPerView: 1.4,
+                },
+                410: {
+                    slidesPerView: 1.5,
+                },
+                440: {
+                    slidesPerView: 1.6,
+                },
+                470: {
+                    slidesPerView: 1.7,
+                },
+                500: {
+                    slidesPerView: 1.9,
+                },
+                530: {
+                    slidesPerView: 2.0,
+                },
+                560: {
+                    slidesPerView: 2.1,
+                },
+                590: {
+                    slidesPerView: 2.2,
+                },
+                610: {
+                    slidesPerView: 2.3,
+                },
+                640: {
+                    slidesPerView: 2.4,
+                },
+                670: {
+                    slidesPerView: 2.5,
+                },
+                700: {
+                    slidesPerView: 2.6,
+                },
+                730: {
+                    slidesPerView: 2.7,
+                },
+                760: {
+                    slidesPerView: 2.8,
+                },
+
+            },
+            slidesOffsetAfter: 75,
+            spaceBerween: 20,
+        },
+        someFunc
+    );
+});
+
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    const resizableSwiper2 = (breakpoint, swiperClass, swiperSettings, callback) => {
+        let swiper;
+
+        breakpoint = window.matchMedia(breakpoint);
+
+        const enableSwiper = function (className, settings) {
+            swiper = new Swiper(className, settings);
+
+            if (callback) {
+                callback(swiper);
+            }
+        }
+
+        const checker = function () {
+            if (breakpoint.matches) {
+                return enableSwiper(swiperClass, swiperSettings);
+            } else {
+                if (swiper !== undefined) swiper.destroy(true, true);
+                return;
+            }
+        };
+
+        breakpoint.addEventListener('change', checker);
+        checker();
+    }
+
+    const someFunc = (instance) => {
+        if (instance) {
+            instance.lifespan('slideChange', function (e) {
+                
+            });
+        }
+    };
+
+    resizableSwiper2(
+        '(max-width: 767px)',
+        '.swiper__technic',
         {
             pagination: {
                 el: '.swiper-pagination',
@@ -192,6 +294,8 @@ const mainText = document.querySelector('.content__main-text');
 const mainTextDbn = document.querySelector('.content__more_text');
 const brendsCard = document.querySelector('.swiper__brend');
 const brendsCardDbn = document.querySelector('.content__more_brends');
+const technicsCard = document.querySelector('.swiper__technic');
+const technicsCardDbn = document.querySelector('.content__more_technic');
 
 mainTextDbn.addEventListener('click', function mainTextShow() {
     
@@ -220,5 +324,20 @@ brendsCardDbn.addEventListener('click', function brendsShow() {
         brendsCardDbn.textContent = "Показать все";
         brendsCard.classList.remove("swiper__brend--show");
         brendsCardDbn.classList.add("content__more_brends--show")
+    }
+});
+
+technicsCardDbn.addEventListener('click', function technicsShow() {
+    
+    if (technicsCardDbn.classList.contains('content__more_technic--show'))
+    {
+        technicsCardDbn.textContent = "Скрыть";
+        technicsCard.classList.add("swiper__technic--show");
+        technicsCardDbn.classList.remove("content__more_technic--show")
+    }
+    else {
+        technicsCardDbn.textContent = "Показать все";
+        technicsCard.classList.remove("swiper__technic--show");
+        technicsCardDbn.classList.add("content__more_technic--show")
     }
 });
